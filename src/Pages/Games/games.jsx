@@ -53,7 +53,7 @@ const shows = [
   {
     title: "Maze Game",
     description:
-      "Navigate through randomly generated mazes! Bet ETH and time limits, complete the maze within your time to win 10x your bet!",
+      "Navigate through randomly generated mazes! Bet MON and time limits, complete the maze within your time to win 10x your bet!",
     image: "/maze.jpg",
     category: "Available games",
     path:"/maze"
@@ -61,7 +61,7 @@ const shows = [
   {
     title: "Snakes & Ladders",
     description:
-      "Classic board game! Roll the dice, climb ladders, slide down snakes. First player to reach square 100 wins! Bet ETH and play with friends!",
+      "Classic board game! Roll the dice, climb ladders, slide down snakes. First player to reach square 100 wins! Bet MON and play with friends!",
     image: "/snl.jpg",
     category: "Available games",
     path:"/snakes"
@@ -73,6 +73,14 @@ const shows = [
     image: "/plinko.jpg",
     category: "Available games",
     path:"/plinko"
+  },
+  {
+    title: "Hangman",
+    description:
+      "Guess crypto-themed words! Choose difficulty levels with different multipliers. Easy (1.5x), Medium (2.5x), Hard (4x). 6 wrong attempts allowed!",
+    image: "/hangman.svg",
+    category: "Available games",
+    path:"/hangman"
   },
 ];
 

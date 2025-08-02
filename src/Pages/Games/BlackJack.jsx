@@ -446,7 +446,7 @@ export default function BlackjackGame() {
                                 : 'bg-blue-600 text-white hover:bg-blue-500'
                             }`}
                           >
-                            {amount} ETH
+                            {amount} MON
                           </button>
                         ))}
                       </div>
@@ -508,7 +508,7 @@ export default function BlackjackGame() {
                 <div className="flex justify-between mt-8">
                   <div className="bg-gray-700 p-4 rounded-lg text-center flex-1 mr-2">
                     <div className="text-gray-400 text-sm">Current Bet</div>
-                    <div className="text-yellow-400 text-xl">{gameState.bet} ETH</div>
+                    <div className="text-yellow-400 text-xl">{gameState.bet} MON</div>
                   </div>
                   
                   <div className="bg-gray-700 p-4 rounded-lg text-center flex-1 ml-2">
@@ -528,7 +528,7 @@ export default function BlackjackGame() {
               <ol className="text-gray-300 space-y-3">
                 <li>
                   <span className="text-cyan-400 font-semibold mr-2">1.</span>
-                  Place your bet in ETH
+                  Place your bet in MON
                 </li>
                 <li>
                   <span className="text-cyan-400 font-semibold mr-2">2.</span>

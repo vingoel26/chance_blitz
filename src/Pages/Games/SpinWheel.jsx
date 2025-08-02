@@ -251,7 +251,7 @@ const WheelGame = () => {
         ethers.parseEther(amountString)
       );
       await tx.wait();
-      alert(`Cashed out: ETH ${amount.toFixed(2)}`);
+              alert(`Cashed out: MON ${amount.toFixed(2)}`);
     } catch (err) {
       console.error("Cash out error:", err);
       alert("Cash out failed");

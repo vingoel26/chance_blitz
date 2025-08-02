@@ -1,0 +1,388 @@
+/* Hangman Game Styles - Preserving original feel */
+.hangman-game {
+    min-height: 100vh;
+    background-color: #191919;
+    color: white;
+    font-family: 'Pixelify Sans', sans-serif;
+    padding: 2rem;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* --- KEY LAYOUT FIX ---
+    - Removed fixed height to allow content to define size.
+    - Added align-items: stretch (default for flex) to make panels equal height.
+  */
+  .game-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+    background: #1F1F1F;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* --- KEY LAYOUT FIX ---
+    - Changed to a flex column to structure its children vertically.
+    - This is crucial for solving the "shorty" panel problem.
+  */
+  .left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .right-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 52, 96, 0.2); /* Subtle navy blue */
+    border-radius: 15px;
+    border: 1px solid rgba(78, 205, 196, 0.2);
+  }
+  
+  /* --- WORD DISPLAY (Top Section) --- */
+  .word-display {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .word-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    min-height: 60px;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    color: #4ecdc4;
+  }
+  
+  .letter {
+    width: 45px;
+    height: 60px;
+    border-bottom: 4px solid #4ecdc4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .letter.guessed {
+    color: white;
+    border-color: #2ecc71; /* Green for correct guess */
+  }
+  
+  .letter-space {
+    width: 20px;
+  }
+  
+  /* --- WALLET CONNECTION --- */
+  .wallet-section {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .connect-wallet-btn {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .connect-wallet-btn:hover {
+    background: linear-gradient(135deg, #44a08d, #4ecdc4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+  }
+
+  .wallet-connected {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  /* --- INTERACTIVE AREA (Middle Section) ---
+    - flex-grow allows this section to expand and push other elements
+      to the top and bottom, filling the vertical space.
+  */
+  .interactive-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Betting Section */
+  .betting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .difficulty-section h3, .bet-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+  }
+  
+  .difficulty-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .difficulty-btn {
+    flex: 1;
+    padding: 15px 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .difficulty-btn.active {
+    color: #191919;
+    font-weight: bold;
+  }
+  
+  /* --- KEY INPUT FIX ---
+    - box-sizing: border-box; prevents padding and border from
+      increasing the element's width, fixing the overflow.
+  */
+  .bet-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4ecdc4;
+    border-radius: 8px;
+    background: rgba(78, 205, 196, 0.1);
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    box-sizing: border-box; /* THE FIX FOR OVERFLOW */
+  }
+  
+  .bet-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+  }
+  
+  .bet-info {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+  }
+  
+  .place-bet-btn {
+    width: 100%;
+    background: linear-gradient(45deg, #4ecdc4, #27ae60); /* Green gradient */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .place-bet-btn:disabled {
+    background: #444;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Keyboard */
+  .keyboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .key {
+    aspect-ratio: 1 / 1;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ccc;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .key:hover:not(:disabled) {
+    background: #4ecdc4;
+    color: #191919;
+    transform: translateY(-2px);
+  }
+  
+  .key.correct {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: #191919;
+    cursor: not-allowed;
+  }
+  
+  .key.wrong {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+    color: #191919;
+    cursor: not-allowed;
+    animation: wrongShake 0.5s ease-in-out;
+  }
+  
+  @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  /* Game Status */
+  .game-status {
+    text-align: center;
+  }
+  
+  .status-message {
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .status-message.won { color: #2ecc71; }
+  .status-message.lost { color: #ff6b6b; }
+  .status-message h3 { font-size: 1.8rem; margin-bottom: 10px; }
+  .new-game-btn, .cashout-btn {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  /* --- INFO PANEL (Bottom Section) --- */
+  .info-panel {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }
+  
+  .info-item {
+    text-align: center;
+  }
+  
+  .info-label {
+    font-size: 0.8rem;
+    color: #b0b0b0;
+    text-transform: uppercase;
+  }
+  
+  .info-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4ecdc4;
+  }
+  
+  .info-value.wrong-value {
+    color: #ff6b6b;
+  }
+  
+  .rules-section p {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: center;
+    line-height: 1.5;
+  }
+  
+  /* Right Panel & Hangman SVG */
+  .hangman-section {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #aaa;
+  }
+  
+  .hangman-svg {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(78, 205, 196, 0.2));
+  }
+  
+  .hangman-svg line, .hangman-svg circle {
+    stroke-linecap: round;
+  }
+  
+  /* Confetti (no changes) */
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .confetti-piece {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  
+  /* Responsive Design (Adjusted for new layout) */
+  @media (max-width: 900px) {
+    .game-container {
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    .right-panel {
+      min-height: 400px;
+    }
+  }

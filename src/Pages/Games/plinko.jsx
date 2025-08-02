@@ -148,7 +148,7 @@ const PlinkoGame = () => {
     try {
       const totalBet = betAmount * ballCount;
       await contractManager.placeBet(totalBet);
-      console.log(`Bet placed: ${totalBet} ETH`);
+      console.log(`Bet placed: ${totalBet} MON`);
     } catch (error) {
       console.error("Error placing bet:", error);
       throw error;
@@ -158,7 +158,7 @@ const PlinkoGame = () => {
   const cashoutFromContract = async (amount) => {
     try {
       await contractManager.cashout(amount);
-      console.log(`Cashout: ${amount} ETH`);
+      console.log(`Cashout: ${amount} MON`);
       return true;
     } catch (error) {
       console.error("Error cashing out:", error);
@@ -742,7 +742,7 @@ const PlinkoGame = () => {
                   <div className="relative flex items-center">
                     <input
                       type="number"
-                      placeholder="ETH"
+                      placeholder="MON"
                       value={betAmount}
                       onChange={(e) => setBetAmount(e.target.value)}
                       disabled={gameState === "dropping"}
@@ -790,7 +790,7 @@ const PlinkoGame = () => {
                   </div>
                   <div className="bg-gray-900 rounded-lg p-3 border border-gray-700">
                     <div className="text-sm text-gray-400">Total Bet</div>
-                    <div className="text-2xl font-bold">{(betAmount * ballCount).toFixed(4)} ETH</div>
+                    <div className="text-2xl font-bold">{(betAmount * ballCount).toFixed(4)} MON</div>
                   </div>
                 </div>
 
@@ -819,7 +819,7 @@ const PlinkoGame = () => {
               {lastWin && gameState === "finished" && (
                 <div className="mt-4 bg-green-900/30 border border-green-600/30 rounded-lg p-4 text-center animate-pulse">
                   <div className="text-sm text-green-400">You won</div>
-                  <div className="text-3xl font-bold text-green-400">{lastWin} ETH</div>
+                  <div className="text-3xl font-bold text-green-400">{lastWin} MON</div>
                 </div>
               )}
             </div>
@@ -834,7 +834,7 @@ const PlinkoGame = () => {
                     .reverse()
                     .map((game, index) => (
                       <div key={index} className="flex justify-between items-center text-sm bg-gray-700 rounded p-2">
-                        <span className="text-gray-400">{game.bet} ETH</span>
+                        <span className="text-gray-400">{game.bet} MON</span>
                         <span
                           className={`font-bold ${Number.parseFloat(game.totalWin) > Number.parseFloat(game.bet) ? "text-green-400" : "text-red-400"}`}
                         >
@@ -843,7 +843,7 @@ const PlinkoGame = () => {
                         <span
                           className={`${Number.parseFloat(game.totalWin) > Number.parseFloat(game.bet) ? "text-green-400" : "text-red-400"}`}
                         >
-                          {game.totalWin} ETH
+                          {game.totalWin} MON
                         </span>
                       </div>
                     ))}
@@ -880,11 +880,11 @@ const PlinkoGame = () => {
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                       <div className="text-sm text-gray-400 mb-1">Total Bet</div>
-                      <div className="text-2xl font-bold">{gameResults.totalBet} ETH</div>
+                      <div className="text-2xl font-bold">{gameResults.totalBet} MON</div>
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 mb-1">Total Win</div>
-                      <div className="text-2xl font-bold text-blue-400">{gameResults.totalWin} ETH</div>
+                      <div className="text-2xl font-bold text-blue-400">{gameResults.totalWin} MON</div>
                     </div>
                     <div>
                       <div className="text-sm text-gray-400 mb-1">Profit/Loss</div>
@@ -898,7 +898,7 @@ const PlinkoGame = () => {
                         }`}
                       >
                         {Number.parseFloat(gameResults.profit) > 0 ? "+" : ""}
-                        {gameResults.profit} ETH
+                        {gameResults.profit} MON
                       </div>
                     </div>
                   </div>
@@ -969,7 +969,7 @@ const PlinkoGame = () => {
                                     : "text-gray-400"
                               }`}
                             >
-                              {result.win} ETH
+                              {result.win} MON
                             </div>
                           </div>
                         </div>
@@ -986,7 +986,7 @@ const PlinkoGame = () => {
               <div className="text-gray-400 space-y-2">
                 <p>1. Choose your risk level (Low, Medium, High) - higher risk = higher potential rewards.</p>
                 <p>2. Select the number of balls to drop simultaneously.</p>
-                <p>3. Enter your bet amount in ETH (multiplied by number of balls).</p>
+                <p>3. Enter your bet amount in MON (multiplied by number of balls).</p>
                 <p>4. Click "Drop Ball" to release the balls from the top.</p>
                 <p>5. Watch as balls bounce off pegs and each other, creating chaotic paths!</p>
                 <p>6. Your winnings are calculated based on where each ball lands.</p>

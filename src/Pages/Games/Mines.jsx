@@ -262,7 +262,7 @@ const MineGamblingGame = () => {
                     
                     <input
                       type="number"
-                      placeholder="ETH"
+                      placeholder="MON"
                       id="BetAmt"
                       value={betAmount}
                       onChange={(e) => setBetAmount(e.target.value)}
@@ -286,7 +286,7 @@ const MineGamblingGame = () => {
                     onClick={cashOut}
                     className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-lg shadow transition-all duration-200 transform hover:-translate-y-1"
                   >
-                    Cash Out {payout} ETH
+                    Cash Out {payout} MON
                   </button>
                 )}
                 
@@ -328,7 +328,7 @@ const MineGamblingGame = () => {
                 {lastWin && gameState === "cashout" && (
                   <div className="mt-4 bg-green-900/30 border border-green-600/30 rounded-lg p-4 text-center animate-pulse">
                     <div className="text-sm text-green-400">You won</div>
-                    <div className="text-3xl font-bold text-green-400">{lastWin} ETH</div>
+                    <div className="text-3xl font-bold text-green-400">{lastWin} MON</div>
                   </div>
                 )}
                 

@@ -218,10 +218,10 @@ const MazeGame = () => {
             try {
               // Cashout winnings from contract
               await contractManager.cashout(payout.toFixed(4));
-              alert(`Congratulations! You won ${payout.toFixed(4)} ETH!`);
+              alert(`Congratulations! You won ${payout.toFixed(4)} MON!`);
             } catch (error) {
               console.error('Error cashing out:', error);
-              alert(`You won ${payout.toFixed(4)} ETH, but there was an error processing the payout: ${error.message}`);
+              alert(`You won ${payout.toFixed(4)} MON, but there was an error processing the payout: ${error.message}`);
             }
           } else {
             setGameState('lost');
@@ -446,7 +446,7 @@ const MazeGame = () => {
                 <>
                   {/* Bet Amount */}
                   <div className="mb-4">
-                    <label className="block text-white mb-2">Bet Amount (ETH)</label>
+                    <label className="block text-white mb-2">Bet Amount (MON)</label>
                     <input
                       type="number"
                       placeholder="0.01"
@@ -477,7 +477,7 @@ const MazeGame = () => {
                       <div className="mt-3 p-3 bg-gray-600 rounded text-center">
                         <p className="text-sm text-gray-300">Potential Reward:</p>
                         <p className="text-lg font-bold text-green-400">
-                          {calculatePayout(betAmount, parseInt(timeBet)).toFixed(4)} ETH
+                          {calculatePayout(betAmount, parseInt(timeBet)).toFixed(4)} MON
                         </p>
                         <p className="text-xs text-gray-400">
                           ({calculatePayout(betAmount, parseInt(timeBet)) / parseFloat(betAmount)}x your bet)
@@ -509,7 +509,7 @@ const MazeGame = () => {
                       </div>
                       <div className="bg-gray-700 p-3 rounded text-center">
                         <div className="text-white text-sm">Bet Amount</div>
-                        <div className="text-2xl font-bold text-cyan-400">{betAmount} ETH</div>
+                        <div className="text-2xl font-bold text-cyan-400">{betAmount} MON</div>
                       </div>
                     </div>
                   </div>
@@ -562,7 +562,7 @@ const MazeGame = () => {
                       <Trophy className="mx-auto text-yellow-400 mb-4" size={60} />
                       <h3 className="text-2xl font-bold text-green-400 mb-2">🎉 You Won!</h3>
                       <p className="text-lg text-green-400 mb-4">
-                        Prize: {calculatePayout(betAmount, parseInt(timeBet)).toFixed(4)} ETH
+                        Prize: {calculatePayout(betAmount, parseInt(timeBet)).toFixed(4)} MON
                       </p>
                     </>
                   ) : (

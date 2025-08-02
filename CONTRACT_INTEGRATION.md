@@ -49,6 +49,11 @@ A shared `ContractManager` class (`src/contract_data/contract-utils.js`) handles
 - **Payout**: 5x multiplier for winning (reaching position 100 first)
 - **Gameplay**: Turn-based dice rolling with snakes and ladders
 
+### Hangman Game
+- **Betting**: Players place bets before starting the word guessing challenge
+- **Payout**: Multipliers based on difficulty (Easy: 1.5x, Medium: 2.5x, Hard: 4x)
+- **Gameplay**: Guess crypto-themed words with 6 wrong attempts allowed
+
 ## Transaction Flow
 
 1. **Wallet Connection**: Player connects MetaMask wallet

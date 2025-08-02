@@ -305,17 +305,17 @@ const SnakesGame = () => {
             setGameState("gameOver");
             if (mover === 'player') {
                 const winnings = betAmount * 5;
-                setGameMessage(`Congratulations! You won ${winnings} ETH!`);
+                setGameMessage(`Congratulations! You won ${winnings} MON!`);
                 
                 try {
                     // Cashout winnings from contract
                     await contractManager.cashout(winnings);
                 } catch (error) {
                     console.error('Error cashing out:', error);
-                    setGameMessage(`You won ${winnings} ETH, but there was an error processing the payout: ${error.message}`);
+                    setGameMessage(`You won ${winnings} MON, but there was an error processing the payout: ${error.message}`);
                 }
             } else {
-                setGameMessage(`The computer won. You lost ${betAmount} ETH.`);
+                setGameMessage(`The computer won. You lost ${betAmount} MON.`);
             }
         } else {
              // If no winner, switch turns
@@ -356,7 +356,7 @@ const SnakesGame = () => {
             // Place bet on contract
             await contractManager.placeBet(betAmount);
             
-            console.log(`Betting ${betAmount} ETH...`);
+            console.log(`Betting ${betAmount} MON...`);
             setGameState("playing");
             setCurrentPlayer('player');
             setGameMessage("Game started! It's your turn to roll.");
@@ -461,7 +461,7 @@ const SnakesGame = () => {
                             </div>
 
                             <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Bet Amount (ETH)</label>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Bet Amount (MON)</label>
                                 <input
                                     type="number"
                                     step="0.01"
