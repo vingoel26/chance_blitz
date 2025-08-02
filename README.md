@@ -1,96 +1,74 @@
-# 🎮 Web3 Maze Game
+# 🎰 Web3 Gaming Platform
 
-A decentralized maze game where players bet ETH and time to complete randomly generated mazes. Win 10x your bet if you complete the maze within your time limit!
+A decentralized Web3 gaming platform built on the Ethereum blockchain featuring:
 
-## 🚀 Features
+- Mines
+- Wheel of Fortune
+- Blackjack
+- High-Low Card Guessing Game
+- Dice Roll
+- Snakes and Ladders
+- Maze
+- Hangman
+- Plinco
 
-- **Random Maze Generation**: Every game has a unique maze using depth-first search algorithm
-- **Web3 Integration**: Connect MetaMask wallet for real cryptocurrency betting
-- **Time-Based Betting**: Bet both money (ETH) and time limit
-- **10x Rewards**: Complete the maze in time to win 10x your bet
-- **Modern UI**: Beautiful, responsive design with smooth animations
-- **Cross-Platform**: Works on desktop and mobile devices
-
-## 🎯 How to Play
-
-1. **Connect Wallet**: Click "Connect Wallet" to link your MetaMask
-2. **Place Your Bet**: Enter bet amount (ETH) and time limit (minutes)
-3. **Navigate the Maze**: Use arrow keys or WASD to move the player
-4. **Reach the End**: Find the green exit point before time runs out
-5. **Win Big**: Complete in time to win 10x your bet!
-
-## 🛠️ Installation & Setup
-
-### Prerequisites
-- Node.js (v16 or higher)
-- MetaMask browser extension
-- Some test ETH for betting
-
-### Install Dependencies
-```bash
-npm install
-```
-
-### Run the Game
-```bash
-npm run dev
-```
-
-The game will open automatically in your browser at `http://localhost:3000`
-
-### Build for Production
-```bash
-npm run build
-```
-
-## 🎮 Game Controls
-
-- **Arrow Keys** or **WASD**: Move player
-- **Touch Controls**: On-screen buttons for mobile devices
-
-## 🔧 Technical Details
-
-- **Frontend**: React 18 with Vite
-- **Web3**: Ethers.js for blockchain integration
-- **Styling**: Custom CSS with animations and responsive design
-- **Maze Algorithm**: Depth-first search for random maze generation
-
-## 🎨 Game States
-
-- **Betting**: Place your bet and time limit
-- **Playing**: Navigate through the maze
-- **Won**: Completed maze within time limit
-- **Lost**: Time ran out or failed to complete
-
-## 🔒 Security Features
-
-- Random maze generation prevents cheating
-- Time-based verification
-- Web3 wallet integration for secure transactions
-- Fair play mechanics
-
-## 🚀 Future Enhancements
-
-- Smart contract integration for automated payouts
-- Multiple difficulty levels
-- Leaderboards and statistics
-- NFT rewards for winners
-- Multiplayer tournaments
-
-## 📱 Mobile Support
-
-The game is fully responsive and works on:
-- Desktop browsers
-- Mobile browsers
-- Tablet devices
-
-## 🎯 Tips for Success
-
-- Plan your route before starting
-- Use the timer wisely
-- Practice with smaller bets first
-- Stay calm under pressure!
+All games are integrated with **MetaMask** for secure wallet-based interactions and powered by smart contracts for fair and transparent gameplay.
 
 ---
 
-**Good luck and happy maze solving! 🎮✨**
+
+## 🛠️ Features
+
+- 🧠 **Smart Contract Logic**: All game logic is handled on-chain using Solidity.
+- 🔐 **Wallet Integration**: Seamless MetaMask authentication and ETH transactions.
+- 💵 **Real ETH Betting**: Place real ETH bets (testnet or mainnet).
+- 🔁 **Streak Multipliers**: High-Low game with multipliers for correct streaks.
+- 🎉 **UI Effects**: Confetti, sounds, and smooth animations for an immersive gaming experience.
+- ⚖️ **Fairness Guaranteed**: Blockchain-based randomness and provable fairness.
+
+---
+
+## 🧰 Tech Stack
+
+- **Frontend**: React + TailwindCSS
+- **Blockchain**: Ethereum (Solidity Smart Contracts)
+- **Wallet**: MetaMask (via Ethers.js)
+- **Frameworks**: Hardhat(Node.js) / Truffle for contract development & deployment
+  
+
+---
+
+## 📸 Screenshots
+![WhatsApp Image 2025-04-06 at 19 49 11_0f5c0dcf](https://github.com/user-attachments/assets/a66d1bb8-fbc4-486f-beed-a1394c05df5d)
+![WhatsApp Image 2025-04-06 at 15 01 28_9fa45af7](https://github.com/user-attachments/assets/a5aeb528-10b2-43f1-97bb-b9cf1f6286f5)
+![WhatsApp Image 2025-04-06 at 19 49 42_9f60e8b5](https://github.com/user-attachments/assets/a61c8bb4-9398-4c4e-8e9a-bc37d53ea4d6)
+![WhatsApp Image 2025-04-06 at 19 49 53_438d29f6](https://github.com/user-attachments/assets/b537a41c-bb78-4af5-aeff-3bf6ac0ca4a6)
+![WhatsApp Image 2025-04-06 at 19 50 16_400bfc7e](https://github.com/user-attachments/assets/475ac01c-5049-4a64-8ae3-5b15b2ceff3b)
+![image](https://github.com/user-attachments/assets/2ee3193e-0181-43f3-b1b7-652d784bb2ea)
+![image](https://github.com/user-attachments/assets/6db6f2f5-0dff-47d7-a855-4fa6a1481666)
+
+
+
+
+
+---
+
+## 🔧 Installation
+
+### 1. Clone the repo
+
+```bash
+https://github.com/AnjaliPai16/Chance.git
+cd Chance/new_hardhat-main
+npm i
+npm install react-confetti
+npm hardhat compile
+npm run dev
+```
+###in other terminal
+```bash
+npx hardhat run scripts/deploy.js --network localhost
+###for local host
+npx hardhat run scripts/deploy.js --network sepolia
+### for sepolia 
+```
