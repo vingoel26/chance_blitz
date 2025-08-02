@@ -1,10 +1,8 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import "./plinko.css"
-// import { ethers } from "ethers"
-// import contractABI from "../../contract_data/Mines.json"
-// import contractAddress from "../../contract_data/Mines-address.json"
-// import { switchToMonadNetwork, isConnectedToMonad } from "../../contract_data/monad-config"
+import { ethers } from "ethers"
+import contractManager from "../../contract_data/contract-utils"
 
 const PlinkoGame = () => {
   // State management
@@ -131,32 +129,41 @@ const PlinkoGame = () => {
     }
   }
 
-  // Mock contract functions for demo purposes
+  // Contract functions
   const initializeEthers = async () => {
-    if (!window.ethereum) {
-      alert("MetaMask not detected!")
-      return
-    }
-
     try {
-      // Mock connection
-      setAccount("0x1234...5678")
-      console.log("Mock wallet connected")
+      const result = await contractManager.initialize();
+      setAccount(result.account);
+      setProvider(result.provider);
+      setSigner(result.signer);
+      setContract(result.contract);
+      console.log("Wallet connected:", result.account);
     } catch (error) {
-      console.error("Error connecting wallet:", error)
+      console.error("Error connecting wallet:", error);
+      alert(`Error connecting wallet: ${error.message}`);
     }
   }
 
   const sendToContract = async () => {
-    // Mock bet transaction
-    console.log(`Mock bet placed: ${betAmount} ETH`)
-    return Promise.resolve()
+    try {
+      const totalBet = betAmount * ballCount;
+      await contractManager.placeBet(totalBet);
+      console.log(`Bet placed: ${totalBet} ETH`);
+    } catch (error) {
+      console.error("Error placing bet:", error);
+      throw error;
+    }
   }
 
   const cashoutFromContract = async (amount) => {
-    // Mock cashout
-    console.log(`Mock cashout: ${amount} ETH`)
-    return Promise.resolve(true)
+    try {
+      await contractManager.cashout(amount);
+      console.log(`Cashout: ${amount} ETH`);
+      return true;
+    } catch (error) {
+      console.error("Error cashing out:", error);
+      throw error;
+    }
   }
 
   // Ball physics class
@@ -384,7 +391,7 @@ const PlinkoGame = () => {
   const pegs = generatePegs()
 
   // Animation loop
-  const animate = () => {
+  const animate = async () => {
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -524,7 +531,12 @@ const PlinkoGame = () => {
 
         // Cashout total winnings
         if (finalTotalWin > 0) {
-          cashoutFromContract(finalTotalWin.toFixed(4))
+          try {
+            await cashoutFromContract(finalTotalWin.toFixed(4))
+          } catch (error) {
+            console.error("Error cashing out:", error);
+            alert(`Error processing payout: ${error.message}`);
+          }
         }
 
         // Clear balls after delay and reset for next game
@@ -537,7 +549,7 @@ const PlinkoGame = () => {
     setBalls(updatedBalls)
 
     if (gameState === "dropping" || balls.length > 0) {
-      animationRef.current = requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(() => animate())
     }
   }
 
@@ -548,23 +560,33 @@ const PlinkoGame = () => {
       return
     }
 
-    await sendToContract()
-
-    // Clear any existing balls first
-    setBalls([])
-    setGameState("dropping")
-    setLastWin(null)
-    setGameResults(null) // Clear results when starting new game
-
-    // Create all balls at once with staggered positions
-    const newBalls = []
-    for (let i = 0; i < ballCount; i++) {
-      const ball = new Ball(CANVAS_WIDTH / 2, 20 - i * 15, i) // Stagger vertically
-      newBalls.push(ball)
+    if (!account) {
+      alert("Please connect your wallet first")
+      return
     }
 
-    // Set all balls at once
-    setBalls(newBalls)
+    try {
+      await sendToContract()
+
+      // Clear any existing balls first
+      setBalls([])
+      setGameState("dropping")
+      setLastWin(null)
+      setGameResults(null) // Clear results when starting new game
+
+      // Create all balls at once with staggered positions
+      const newBalls = []
+      for (let i = 0; i < ballCount; i++) {
+        const ball = new Ball(CANVAS_WIDTH / 2, 20 - i * 15, i) // Stagger vertically
+        newBalls.push(ball)
+      }
+
+      // Set all balls at once
+      setBalls(newBalls)
+    } catch (error) {
+      console.error("Error starting game:", error);
+      alert(`Error starting game: ${error.message}`);
+    }
   }
 
   // Reset game
@@ -581,7 +603,7 @@ const PlinkoGame = () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
-      animationRef.current = requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(() => animate())
     }
 
     return () => {
@@ -625,6 +647,22 @@ const PlinkoGame = () => {
             <div className="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700">
               <div className="mb-6">
                 <h3 className="text-xl font-bold mb-4 text-gray-300">Game Setup</h3>
+
+                {/* Wallet Connection */}
+                <div className="mb-4">
+                  {!account ? (
+                    <button
+                      onClick={initializeEthers}
+                      className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow transition-all duration-200"
+                    >
+                      Connect Wallet
+                    </button>
+                  ) : (
+                    <div className="text-green-400 font-bold text-center py-3 bg-gray-700 rounded-lg">
+                      ✅ Wallet Connected: {account.slice(0, 6)}...{account.slice(-4)}
+                    </div>
+                  )}
+                </div>
 
                 {/* Sound Toggle */}
                 <div className="mb-4">

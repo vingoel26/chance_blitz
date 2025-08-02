@@ -6,6 +6,7 @@ import { Timer, DollarSign, Trophy, Play, RotateCcw, ArrowLeft } from 'lucide-re
 import "./maze.css";
 import "./globals.css";
 import Navbar from "../navbar";
+import contractManager from '../../contract_data/contract-utils';
 
 const MazeGame = () => {
   const router = useRouter();
@@ -19,6 +20,8 @@ const MazeGame = () => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
+  const [account, setAccount] = useState(null);
+  const [contract, setContract] = useState(null);
 
   const MAZE_SIZE = 25; // Increased from 15 to 25 for more difficulty
   const CELL_SIZE = 20; // Reduced cell size to fit larger maze
@@ -59,18 +62,16 @@ const MazeGame = () => {
 
   // Connect wallet
   const connectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        setProvider(provider);
-        setSigner(signer);
-        setWalletConnected(true);
-      } catch (error) {
-        console.error('Error connecting wallet:', error);
-      }
-    } else {
-      alert('Please install MetaMask!');
+    try {
+      const result = await contractManager.initialize();
+      setProvider(result.provider);
+      setSigner(result.signer);
+      setAccount(result.account);
+      setContract(result.contract);
+      setWalletConnected(true);
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+      alert(`Error connecting wallet: ${error.message}`);
     }
   };
 
@@ -174,20 +175,28 @@ const MazeGame = () => {
   }, [generateMaze]);
 
   // Start the actual game after betting
-  const startGame = () => {
+  const startGame = async () => {
     if (!betAmount || !timeBet || !walletConnected) {
       alert('Please enter bet amount, time, and connect wallet!');
       return;
     }
     
-    const timeInSeconds = parseInt(timeBet); // Time is already in seconds
-    setTimeLeft(timeInSeconds);
-    setStartTime(Date.now());
-    setGameState('playing');
+    try {
+      // Place bet on contract
+      await contractManager.placeBet(betAmount);
+      
+      const timeInSeconds = parseInt(timeBet); // Time is already in seconds
+      setTimeLeft(timeInSeconds);
+      setStartTime(Date.now());
+      setGameState('playing');
+    } catch (error) {
+      console.error('Error placing bet:', error);
+      alert(`Error placing bet: ${error.message}`);
+    }
   };
 
   // Handle player movement
-  const movePlayer = useCallback((dx, dy) => {
+  const movePlayer = useCallback(async (dx, dy) => {
     if (gameState !== 'playing') return;
     
     const newX = playerPos.x + dx;
@@ -205,8 +214,15 @@ const MazeGame = () => {
           if (timeUsed <= timeBetSeconds) {
             setGameState('won');
             const payout = calculatePayout(betAmount, timeBetSeconds);
-            // Here you would integrate with smart contract to pay out the calculated amount
-            alert(`Congratulations! You won ${payout.toFixed(4)} ETH!`);
+            
+            try {
+              // Cashout winnings from contract
+              await contractManager.cashout(payout.toFixed(4));
+              alert(`Congratulations! You won ${payout.toFixed(4)} ETH!`);
+            } catch (error) {
+              console.error('Error cashing out:', error);
+              alert(`You won ${payout.toFixed(4)} ETH, but there was an error processing the payout: ${error.message}`);
+            }
           } else {
             setGameState('lost');
             alert("Time's up! You lost your bet.");
@@ -218,23 +234,23 @@ const MazeGame = () => {
 
   // Handle keyboard input
   useEffect(() => {
-    const handleKeyPress = (e) => {
+    const handleKeyPress = async (e) => {
       switch (e.key) {
         case 'ArrowUp':
         case 'w':
-          movePlayer(0, -1);
+          await movePlayer(0, -1);
           break;
         case 'ArrowDown':
         case 's':
-          movePlayer(0, 1);
+          await movePlayer(0, 1);
           break;
         case 'ArrowLeft':
         case 'a':
-          movePlayer(-1, 0);
+          await movePlayer(-1, 0);
           break;
         case 'ArrowRight':
         case 'd':
-          movePlayer(1, 0);
+          await movePlayer(1, 0);
           break;
         default:
           break;

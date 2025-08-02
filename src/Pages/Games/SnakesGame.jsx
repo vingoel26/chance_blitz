@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import "./snakes.css";
 import "./globals.css";
 import Navbar from "../navbar";
+import contractManager from '../../contract_data/contract-utils';
 
 // --- Helper Components ---
 
@@ -181,11 +182,30 @@ const SnakesGame = () => {
     // Web3 State
     const [account, setAccount] = useState(null);
     const [contract, setContract] = useState(null);
+    const [provider, setProvider] = useState(null);
+    const [signer, setSigner] = useState(null);
+    const [walletConnected, setWalletConnected] = useState(false);
+    
+    // Initialize wallet connection
+    const initializeWallet = async () => {
+        try {
+            const result = await contractManager.initialize();
+            setAccount(result.account);
+            setContract(result.contract);
+            setProvider(result.provider);
+            setSigner(result.signer);
+            setWalletConnected(true);
+            console.log("Wallet connected:", result.account);
+        } catch (error) {
+            console.error("Error connecting wallet:", error);
+        }
+    };
     
     // This effect would handle connecting to MetaMask
     useEffect(() => {
-        // initializeEthers(); 
-        console.log("Web3 connection would be initialized here.");
+        if (window.ethereum) {
+            initializeWallet();
+        }
     }, []);
 
     // This effect handles the computer's turn
@@ -197,10 +217,10 @@ const SnakesGame = () => {
                 setGameMessage(`Computer rolled a ${roll}!`);
                 setIsRolling(true);
                 
-                setTimeout(() => {
+                setTimeout(async () => {
                     setDiceValue(roll);
                     setIsRolling(false);
-                    handleMove(roll, 'computer', setComputerPosition);
+                    await handleMove(roll, 'computer', setComputerPosition);
                 }, 1000);
             }, 2000); // Wait 2 seconds before computer rolls
         }
@@ -222,7 +242,7 @@ const SnakesGame = () => {
     };
 
     // --- Game Logic ---
-    const handleMove = (roll, mover, setMoverPosition) => {
+    const handleMove = async (roll, mover, setMoverPosition) => {
         let currentPosition = mover === 'player' ? playerPosition : computerPosition;
         let newPosition = currentPosition;
         
@@ -284,8 +304,16 @@ const SnakesGame = () => {
         if (newPosition === WINNING_POSITION) {
             setGameState("gameOver");
             if (mover === 'player') {
-                setGameMessage(`Congratulations! You won ${betAmount * 5} ETH!`);
-                // cashoutFromContract(betAmount * 5);
+                const winnings = betAmount * 5;
+                setGameMessage(`Congratulations! You won ${winnings} ETH!`);
+                
+                try {
+                    // Cashout winnings from contract
+                    await contractManager.cashout(winnings);
+                } catch (error) {
+                    console.error('Error cashing out:', error);
+                    setGameMessage(`You won ${winnings} ETH, but there was an error processing the payout: ${error.message}`);
+                }
             } else {
                 setGameMessage(`The computer won. You lost ${betAmount} ETH.`);
             }
@@ -304,10 +332,10 @@ const SnakesGame = () => {
         const roll = Math.floor(Math.random() * 6) + 1;
         setGameMessage(`You rolled a ${roll}!`);
         
-        setTimeout(() => {
+        setTimeout(async () => {
             setDiceValue(roll);
             setIsRolling(false);
-            handleMove(roll, 'player', setPlayerPosition);
+            await handleMove(roll, 'player', setPlayerPosition);
         }, 1000);
     };
 
@@ -318,14 +346,24 @@ const SnakesGame = () => {
             alert("Please enter a valid bet amount.");
             return;
         }
-        // In a real app, this would call the smart contract
-        // const success = await sendtocontract(betAmount);
-        // if (success) { ... }
         
-        console.log(`Betting ${betAmount} ETH...`);
-        setGameState("playing");
-        setCurrentPlayer('player');
-        setGameMessage("Game started! It's your turn to roll.");
+        if (!walletConnected) {
+            alert("Please connect your wallet first.");
+            return;
+        }
+        
+        try {
+            // Place bet on contract
+            await contractManager.placeBet(betAmount);
+            
+            console.log(`Betting ${betAmount} ETH...`);
+            setGameState("playing");
+            setCurrentPlayer('player');
+            setGameMessage("Game started! It's your turn to roll.");
+        } catch (error) {
+            console.error('Error placing bet:', error);
+            alert(`Error placing bet: ${error.message}`);
+        }
     };
 
     const handleResetGame = () => {
@@ -406,6 +444,22 @@ const SnakesGame = () => {
                         <div>
                             <h3 className="text-2xl font-bold mb-4 text-gray-300 border-b border-gray-700 pb-2">Game Controls</h3>
                             
+                            {/* Wallet Connection */}
+                            <div className="mb-6">
+                                {!walletConnected ? (
+                                    <button
+                                        onClick={initializeWallet}
+                                        className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white py-3 px-4 rounded-lg font-bold hover:opacity-80 transition-opacity"
+                                    >
+                                        Connect Wallet
+                                    </button>
+                                ) : (
+                                    <div className="text-green-400 font-bold text-center py-3 bg-gray-700 rounded-lg">
+                                        ✅ Wallet Connected
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-400 mb-2">Bet Amount (ETH)</label>
                                 <input
