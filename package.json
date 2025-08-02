@@ -1,0 +1,40 @@
+{
+  "name": "hardhat-project",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "hardhat:deploy": "npx hardhat run scripts/deploy.js --network localhost",
+    "hardhat:deploy:sepolia": "npx hardhat run scripts/deploy.js --network sepolia",
+    "hardhat:deploy:monad-testnet": "npx hardhat run scripts/deploy.js --network monad_testnet",
+    "hardhat:deploy:monad-mainnet": "npx hardhat run scripts/deploy.js --network monad_mainnet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/react": "19.1.0",
+    "autoprefixer": "^10.4.21",
+    "hardhat": "^2.22.19",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.1",
+    "@heroicons/react": "^2.2.0",
+    "@splinetool/react-spline": "^4.0.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "ethers": "^6.8.1",
+    "framer-motion": "^12.6.3",
+    "lucide-react": "^0.487.0",
+    "motion": "^12.6.3",
+    "next": "^15.2.2",
+    "react": "^19.0.0",
+    "react-confetti": "^6.4.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.0",
+    "react-router-dom": "^7.5.0",
+    "tailwind-merge": "^3.1.0"
+  }
+}

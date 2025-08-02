@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Page layout */
+#BetAmt{
+    border-radius: 5px;
+    padding: 10px;
+}
+.page {
+    height: 70vh;
+    width: 100vw;
+    margin-bottom: 100px;
+}
+
+/* Content container */
+.content-container {
+    padding: 10px;
+    border-radius: 35px;
+    box-shadow: 0 5px 0 black;
+}
+
+/* Grid styles */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 120px);
+    gap: 5px;
+    padding: 30px;
+    padding-left: 35px;
+    border-radius: 25px;
+    border: solid black;
+    box-shadow: 5px 5px 0 rgb(19, 19, 19);
+}
+
+/* Individual box styles */
+.box {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+    background-color: #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 3px 3px grey;
+}
+
+.box:hover {
+    transform: translateY(-5%);
+}
+
+.box.clicked {
+    background-color: #bbb;
+    transform: scale(0.9);
+}
+
+.box img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Typography */
+p {
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Righteous', cursive;
+}

@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Page layout */
+.page {
+    height: 70vh;
+    width: 100vw;
+    margin-bottom: 100px;
+}
+
+/* Content container */
+.content-container {
+    padding: 10px;
+    border-radius: 35px;
+    box-shadow: 0 5px 0 black;
+}
+
+/* Typography */
+p {
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Righteous', cursive;
+}
+
+/* Maze Grid */
+.maze-grid {
+    display: inline-block;
+    border: 3px solid #374151;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 5px 0 rgb(19, 19, 19);
+    background: #1f2937;
+}
+
+.maze-row {
+    display: flex;
+}
+
+.maze-cell {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #4b5563;
+    transition: all 0.2s ease;
+}
+
+.maze-cell.wall {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+.maze-cell.path {
+    background: #6b7280;
+}
+
+.maze-cell.player {
+    background: linear-gradient(45deg, #06b6d4, #8b5cf6);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.maze-cell.end {
+    background: linear-gradient(45deg, #10b981, #059669);
+    border-radius: 5px;
+    animation: glow 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px #10b981; }
+    to { box-shadow: 0 0 20px #10b981, 0 0 30px #10b981; }
+}
+
+/* Override any old styling that might be interfering */
+.maze-game {
+    background: #191919 !important;
+    color: white !important;
+}
+
+.game-header {
+    background: transparent !important;
+    color: white !important;
+}
+
+.game-header h1 {
+    background: linear-gradient(45deg, #06b6d4, #8b5cf6) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: none !important;
+}
+
+.betting-section,
+.game-section,
+.result-section {
+    background: #374151 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 5px 0 black !important;
+}
+
+.input-group {
+    background: #4b5563 !important;
+    border: 2px solid #6b7280 !important;
+    color: white !important;
+}
+
+.input-group input {
+    background: #4b5563 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.input-group input::placeholder {
+    color: #9ca3af !important;
+}
+
+.game-rules {
+    background: #4b5563 !important;
+    border-left: 4px solid #06b6d4 !important;
+    color: white !important;
+}
+
+.game-rules p {
+    color: #d1d5db !important;
+}
+
+.start-btn,
+.new-game-btn {
+    background: linear-gradient(45deg, #06b6d4, #8b5cf6) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 5px 0 black !important;
+}
+
+.start-btn:hover:not(:disabled),
+.new-game-btn:hover {
+    opacity: 0.8 !important;
+    transform: translateY(-2px) !important;
+}
+
+.game-info {
+    background: transparent !important;
+}
+
+.info-item {
+    background: #4b5563 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 0 black !important;
+}
+
+.controls {
+    background: transparent !important;
+}
+
+.controls p {
+    color: #d1d5db !important;
+}
+
+.control-buttons button {
+    background: #4b5563 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 0 black !important;
+}
+
+.control-buttons button:hover {
+    background: #6b7280 !important;
+    transform: translateY(-2px) !important;
+}
+
+.result {
+    background: transparent !important;
+    color: white !important;
+}
+
+.result.won {
+    color: #10b981 !important;
+}
+
+.result.lost {
+    color: #ef4444 !important;
+}
+
+.result p {
+    color: #d1d5db !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .maze-cell {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .maze-cell {
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.wheel-game-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #111827;
+    color: white;
+  }
+  
+  @media (min-width: 768px) {
+    .wheel-game-container {
+      flex-direction: row;
+    }
+  }
+  
+  .control-panel {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #1f2937;
+    border-right: 1px solid #374151;
+  }
+  
+  @media (min-width: 768px) {
+    .control-panel {
+      width: 33.333333%;
+    }
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  
+  .bet-control {
+    margin-bottom: 1.5rem;
+  }
+  
+  .control-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .bet-input-group {
+    display: flex;
+  }
+  
+  .bet-input {
+    flex: 1;
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    border-radius: 0.25rem 0 0 0.25rem;
+    padding: 0.5rem;
+    color: white;
+  }
+  
+  .bet-input:disabled {
+    opacity: 0.7;
+  }
+  
+  .bet-modifier {
+    background-color: #4b5563;
+    padding: 0 0.75rem;
+    border: 1px solid #4b5563;
+    color: white;
+  }
+  
+  .bet-modifier.half {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .bet-modifier.double {
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+  
+  .bet-modifier:disabled {
+    opacity: 0.7;
+  }
+  
+  .risk-control {
+    margin-bottom: 1.5rem;
+  }
+  
+  .risk-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .risk-button {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    background-color: #374151;
+    color: #d1d5db;
+  }
+  
+  .risk-button.low {
+    background-color: #16a34a;
+    color: white;
+    border: 0px;
+  }
+  
+  .risk-button.medium {
+    background-color: #ca8a04;
+    color: white;
+  }
+  
+  .risk-button.high {
+    background-color: #dc2626;
+    color: white;
+  }
+  
+  .risk-button:disabled {
+    opacity: 0.7;
+  }
+  
+  .spin-button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    font-weight: 700;
+    background-color: #22c55e;
+    color: white;
+  }
+  
+  .spin-button:hover:not(:disabled) {
+    background-color: #16a34a;
+  }
+  
+  .spin-button.spinning {
+    background-color: #4b5563;
+  }
+  
+  .multipliers-section {
+    margin-top: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  .multipliers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .multiplier-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-size: 0.875rem;
+    background-color: #1a1a1a;
+  }
+  
+  .wheel-display {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media (min-width: 768px) {
+    .wheel-display {
+      width: 66.666667%;
+    }
+  }
+  
+  .wheel-container {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    aspect-ratio: 1/1;
+  }
+  
+  .wheel-canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .wheel-pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .wheel-pointer::before {
+    content: '';
+    display: block;
+    width: 1rem;
+    height: 2rem;
+    background-color: #ef4444;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  
+  .result-display {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .result-circle {
+    border-radius: 9999px;
+    padding: 2rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .result-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .result-amount.win {
+    color: #4ade80;
+  }
+  
+  .result-amount.lose {
+    color: #f87171;
+  }
+  
+  .congrats-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 20;
+  }
+  
+  .congrats-banner-container {
+    position: absolute;
+    inset-x: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+    overflow: hidden;
+  }
+  
+  .congrats-banner {
+    background: linear-gradient(to right, #f59e0b, #f97316, #f59e0b);
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: rotate(3deg);
+    border: 4px solid white;
+  }
+  
+  .congrats-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+  }
+  
+  .win-amount-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+  }
+  
+  .win-amount-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .win-amount-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4ade80;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.5);
+  }
+  
+  .congrats-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #facc15;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .confetti-particle {
+    position: absolute;
+    z-index: 20;
+  }
+  
+  .win-coin {
+    position: absolute;
+    z-index: 25;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background-color: #facc15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 215, 0, 0.7);
+    border: 2px solid #FFD700;
+  }
+  
+  .coin-symbol {
+    font-weight: 700;
+    color: #92400e;
+  }
+  
+  .win-star {
+    position: absolute;
+    z-index: 20;
+    width: 15px;
+    height: 15px;
+  }

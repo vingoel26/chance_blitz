@@ -1,0 +1,133 @@
+/* Plinko specific styles */
+.plinko-canvas {
+    border: 2px solid #374151;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+  }
+  
+  .plinko-ball {
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #60a5fa, #3b82f6);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .plinko-peg {
+    border-radius: 50%;
+    background: #6b7280;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .multiplier-slot {
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .multiplier-slot.high-multiplier {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 0 15px rgba(5, 150, 105, 0.3);
+  }
+  
+  .multiplier-slot.medium-multiplier {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    box-shadow: 0 0 10px rgba(8, 145, 178, 0.3);
+  }
+  
+  .multiplier-slot.low-multiplier {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+  }
+  
+  .ball-trail {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(59, 130, 246, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fade-out 0.5s ease-out forwards;
+  }
+  
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+  
+  @keyframes ball-bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .ball-bounce {
+    animation: ball-bounce 0.2s ease-out;
+  }
+  
+  @keyframes slot-highlight {
+    0% {
+      box-shadow: 0 0 0 rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 0 rgba(59, 130, 246, 0.5);
+    }
+  }
+  
+  .slot-win {
+    animation: slot-highlight 1s ease-in-out 3;
+  }
+  
+  /* Risk level buttons */
+  .risk-button {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .risk-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .risk-button:hover::before {
+    left: 100%;
+  }
+  
+  /* Typography */
+  p {
+    font-family: "Courier New", monospace;
+    font-weight: 600;
+  }
+  
+  h1 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-weight: 900;
+  }
+  
+  /* Responsive canvas */
+  @media (max-width: 768px) {
+    .plinko-canvas {
+      width: 100%;
+      height: auto;
+    }
+  }

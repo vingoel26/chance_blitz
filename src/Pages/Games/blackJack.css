@@ -1,0 +1,71 @@
+/* styles.css for BlackJack component */
+
+@keyframes dealCard {
+    0% { transform: translateY(-100px) rotate(5deg); opacity: 0; }
+    100% { transform: translateY(0) rotate(0); opacity: 1; }
+  }
+  
+  .card-animation {
+    animation: dealCard 0.3s ease-out forwards;
+  }
+  
+  /* Add these classes if you're not using Tailwind or if Tailwind classes aren't working */
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, var(--from-color), var(--to-color));
+  }
+  
+  .from-green-900 {
+    --from-color: #064e3b;
+  }
+  
+  .to-green-700 {
+    --to-color: #047857;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .rounded-2xl {
+    border-radius: 1rem;
+  }
+  
+  .shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+  .border-green-600 {
+    border-color: #059669;
+  }
+  
+  .bg-green-800 {
+    background-color: #065f46;
+  }
+  
+  .text-gray-300 {
+    color: #d1d5db;
+  }
+  
+  .text-gray-200 {
+    color: #e5e7eb;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Add more style overrides as needed */
