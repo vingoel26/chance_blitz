@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "hardhat:deploy": "npx hardhat run scripts/deploy.js --network localhost",
     "hardhat:deploy:sepolia": "npx hardhat run scripts/deploy.js --network sepolia",
     "hardhat:deploy:monad-testnet": "npx hardhat run scripts/deploy.js --network monad_testnet",
