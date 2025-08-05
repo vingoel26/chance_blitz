@@ -140,15 +140,17 @@ const timeOptions = [
   { label: "2 min", value: 2 },
   { label: "5 min", value: 5 },
   { label: "10 min", value: 10 },
+  { label: "15 min", value: 15 },
+  { label: "20 min", value: 20 },
 ];
 
 const multipliers = {
-  easy:   { 2: 2,  5: 1.5, 10: 1.2 },
-  medium: { 2: 3,  5: 2,   10: 1.5 },
-  hard:   { 2: 5,  5: 3,   10: 2   },
-  expert: { 2: 10, 5: 5,   10: 3   },
-  lord:   { 2: 25, 5: 15,  10: 7   },
-};
+    easy:   { 2: 2,  5: 1.5, 10: 1.2, 15: 1.1, 20: 1.05 },
+    medium: { 2: 3,  5: 2,   10: 1.5, 15: 1.2, 20: 1.1 },
+    hard:   { 2: 5,  5: 3,   10: 2,   15: 1.5, 20: 1.2 },
+    expert: { 2: 10, 5: 5,   10: 3,   15: 2,   20: 1.5 },
+    lord:   { 2: 25, 5: 15,  10: 7,   15: 3,   20: 2 },
+  };
 
 function getMultiplier(difficulty, minutes) {
   if (!multipliers[difficulty]) return 1;
