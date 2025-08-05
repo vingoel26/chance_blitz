@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "./components/ui/card.jsx";
-import { Input } from "./components/ui/input.jsx";
-import { Button } from "./components/ui/button.jsx";
+import { Card, CardContent } from "../../components/ui/card.jsx";
+import { Input } from "../../components/ui/input.jsx";
+import { Button } from "../../components/ui/button.jsx";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react"; // Icon library
 import Link from "next/link";
@@ -81,6 +81,14 @@ const shows = [
     image: "/hangman.svg",
     category: "Available games",
     path:"/hangman"
+  },
+  {
+    title: "Sudoku",
+    description:
+      "Bet how fast you can solve challenging Sudoku puzzles—use pencil marks, erase, and win bigger rewards for harder difficulties and faster solutions.",
+    image: "/sudoku.jpg",
+    category: "Available games",
+    path:"/Sudoku"
   },
 ];
 

@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/Pages/Games/components/utils/cn.js", "src/Pages/Games/components/ui/selection.jsx", "src/Pages/Games/components/ui/Spotlight.jsx"  ],
+, "src/components/utils/cn.js", "src/components/ui/selection.jsx", "src/components/ui/Spotlight.jsx"  ],
   "exclude": [
     "node_modules"
   ]

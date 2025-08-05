@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+
+/* Root and page background */
+body {
+  background: linear-gradient(to bottom, #232946, #121624 90%);
+  font-family: 'Pixelify Sans', sans-serif;
+}
+/* Use JetBrains Mono for sudoku grid numbers */
+.sudoku-cell input,
+.sudoku-cell-prefilled {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Container styles */
+.sudoku-bet-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 32px;
+  min-height: 100vh;
+}
+
+/* Header */
+.sudoku-bet-header {
+  font-family: 'Righteous', cursive;
+  font-size: 2.25rem;
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sudoku-pencil-marks {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 0.7em;
+    color: #99c9ff;
+    font-family: 'JetBrains Mono', monospace;
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+
+/* Setup panel */
+.sudoku-setup-panel {
+  background: #262a39;
+  border: 1.5px solid #373b52;
+  border-radius: 1.25rem;
+  padding: 28px 24px;
+  box-shadow: 0 6px 40px #17192330;
+}
+
+.sudoku-setup-panel label {
+  color: #a6accb;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  font-family: inherit;
+}
+
+/* Select and Input */
+.sudoku-setup-panel select,
+.sudoku-setup-panel input[type="number"] {
+  background-color: #161822;
+  border: 1px solid #32354d;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.sudoku-setup-panel select:focus,
+.sudoku-setup-panel input[type="number"]:focus {
+  border-color: #7dd3fc;
+}
+
+/* Action and status buttons */
+.sudoku-action-btn {
+  background: linear-gradient(to right, #8b5cf6, #2563eb);
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 0;
+  border-radius: 0.6rem;
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 2px 12px #17192377;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+}
+
+.sudoku-action-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 20px #74b8ff30;
+}
+
+/* Timer Badge */
+.sudoku-timer-badge {
+  display: block;
+  background: #1e2250;
+  border: 1.5px solid #60a5fa;
+}
