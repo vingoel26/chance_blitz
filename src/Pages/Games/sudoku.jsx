@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-// import "./sudoku-bet.css"; // If using CSS from prior steps
+ import "./sudoku.css"; 
+ import "./globals.css"; // If using CSS from prior steps
 
 // Font import suggestion (if not in CSS):
 // Place in global css: @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
